@@ -7,6 +7,7 @@ package movieguessinggame;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,7 +36,7 @@ public class Game {
                 
             }      
         } catch (FileNotFoundException e) {
-            System.out.println("A movies file was not found. Please put a file called movieList.txt in your "
+            out.println("A movies file was not found. Please put a file called movieList.txt in your "
                     + "project folder. "); 
         }
         
@@ -52,17 +53,18 @@ public class Game {
     public String obscureMovie(String movieTitle) {
         return movieTitle.replaceAll("[a-zA-Z]", "_"); 
     }
-
-
-    /**
-     *
-     */
-    public void playGame(){
-        String movieToGuess = getRandomMovie();
-        String obscuredMovieToGuess = obscureMovie(movieToGuess);
-        
+    
+    public String inputLetter() {
+        System.out.println("Guess a letter"); 
         Scanner scan = new Scanner(System.in); 
         
+        String letter = scan.next().toLowerCase();
+        
+        if(!letter.matches("[a-z]")){
+            out.println("This is not a letter"); 
+            return inputLetter();
+        }
+        
+        return letter; 
     }
-    
 }
