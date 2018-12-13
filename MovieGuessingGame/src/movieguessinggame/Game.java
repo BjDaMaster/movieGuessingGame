@@ -48,8 +48,12 @@ public class Game {
         return movies.get(movieIndex); 
     }
     
-    private String obscureMovie(String movieTitle) {
-        return movieTitle.replaceAll("[a-zA-Z]", "_"); 
+    private String obscureMovie(String movieTitle, String correctLetters) {
+        if (correctLetters == "") {
+            return movieTitle.replaceAll("[a-zA-Z]", "_");            
+        } else{
+            return movieTitle.replaceAll("[a-zA-Z&&[^" + correctLetters + "]]", "_");
+        }
     }
     
     public String inputLetter() {
@@ -81,9 +85,9 @@ public class Game {
         String wrongLetters;
         String correctLetters; 
         
-        String guess = inputLetter();
+        //System.out.println("You are guessing:" + obscureMovie(movie)); 
         
-        System.out.println("You are guessing:" + obscureMovie(movie)); 
+        String guess = inputLetter();
         
         checkGuess(movie, guess); 
     }
