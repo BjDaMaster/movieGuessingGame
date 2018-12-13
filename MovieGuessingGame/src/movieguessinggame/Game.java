@@ -19,8 +19,6 @@ public class Game {
     int badGuesses = 0; 
     boolean won = false; 
     String randMovie;
-    ArrayList<String> correctLetters=new ArrayList<>();//Creating arraylist
-    ArrayList<String> incorrectLetters=new ArrayList<>();//Creating arraylist
     /**
      * Method to pick a movie from the list
      * @return 
@@ -50,7 +48,7 @@ public class Game {
         return movies.get(movieIndex); 
     }
     
-    public String obscureMovie(String movieTitle) {
+    private String obscureMovie(String movieTitle) {
         return movieTitle.replaceAll("[a-zA-Z]", "_"); 
     }
     
@@ -66,5 +64,27 @@ public class Game {
         }
         
         return letter; 
+    }
+    
+    /**
+     * Checks if user guess is in movie title
+     * @param movieTitle
+     * @param guess
+     * @return boolean
+     */
+    public boolean checkGuess(String movieTitle, String guess){
+        return movieTitle.contains(guess); 
+    }
+    
+    public void initGame(){
+        String movie = getRandomMovie();
+        String wrongLetters;
+        String correctLetters; 
+        
+        String guess = inputLetter();
+        
+        System.out.println("You are guessing:" + obscureMovie(movie)); 
+        
+        checkGuess(movie, guess); 
     }
 }
