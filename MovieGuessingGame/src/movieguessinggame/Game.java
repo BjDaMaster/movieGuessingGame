@@ -101,6 +101,11 @@ public class Game {
             
             String guess = inputLetter();
             
+            if(correctLetters.contains(guess) || wrongLetters.contains(guess)){
+                System.out.println("You already guessed that letter"); 
+                guess = inputLetter();
+            }
+            
             if(checkGuess(movie, guess)){
                 correctLetters += guess;
             }else{
@@ -113,7 +118,7 @@ public class Game {
                 won = true; 
                 System.out.println(obscureMovie(movie, correctLetters)); 
                 gameOver(); 
-            }else if(badGuesses > 10){
+            }else if(badGuesses == 7){
                 gameOver = true; 
                 gameOver(); 
             }
