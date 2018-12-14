@@ -81,14 +81,19 @@ public class Game {
     }
     
     public void initGame(){
-        String movie = getRandomMovie();
-        String wrongLetters;
-        String correctLetters; 
+        boolean gameWon = false; 
         
-        //System.out.println("You are guessing:" + obscureMovie(movie)); 
-        
-        String guess = inputLetter();
-        
-        checkGuess(movie, guess); 
+       
+        while (!gameWon) {            
+            String movie = getRandomMovie();
+            String wrongLetters;
+            String correctLetters = "";            
+            
+            obscureMovie(movie, correctLetters);            
+            
+            String guess = inputLetter();
+            
+            checkGuess(movie, guess);            
+        }
     }
 }
