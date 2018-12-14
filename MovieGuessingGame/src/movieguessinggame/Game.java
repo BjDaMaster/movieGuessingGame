@@ -16,7 +16,6 @@ import java.util.Scanner;
  * @author fornebra
  */
 public class Game {
-    int badGuesses = 0; 
     boolean won = false; 
     String randMovie;
     /**
@@ -57,7 +56,7 @@ public class Game {
     }
     
     public String inputLetter() {
-        System.out.println("Guess a letter"); 
+        System.out.println("Guess a letter:"); 
         Scanner scan = new Scanner(System.in); 
         
         String letter = scan.next().toLowerCase();
@@ -80,20 +79,44 @@ public class Game {
         return movieTitle.contains(guess); 
     }
     
+    public void gameOver(){
+        if(won){
+            System.out.println("You Won! Congrats");
+        }else{
+            System.out.println("You lost :/ try building next time"); 
+        }
+    }
+    
     public void initGame(){
-        boolean gameWon = false; 
-        
+        boolean gameOver = false; 
+        String movie = getRandomMovie();
+        String wrongLetters = "";
+        String correctLetters = "";   
+        int badGuesses = 0; 
        
-        while (!gameWon) {            
-            String movie = getRandomMovie();
-            String wrongLetters;
-            String correctLetters = "";            
-            
-            obscureMovie(movie, correctLetters);            
+        while (!gameOver) {            
+                     
+            System.out.printf("You have guessed %d wrong letters\n", badGuesses);
+            System.out.println("You are guessing: "+obscureMovie(movie, correctLetters));            
             
             String guess = inputLetter();
             
-            checkGuess(movie, guess);            
+            if(checkGuess(movie, guess)){
+                correctLetters += guess;
+            }else{
+                wrongLetters += guess; 
+                badGuesses += 1; 
+            }
+            
+            if (!obscureMovie(movie, correctLetters).contains("_")){
+                gameOver = true; 
+                won = true; 
+                System.out.println(obscureMovie(movie, correctLetters)); 
+                gameOver(); 
+            }else if(badGuesses > 10){
+                gameOver = true; 
+                gameOver(); 
+            }
         }
     }
 }
