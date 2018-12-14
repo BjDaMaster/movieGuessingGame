@@ -21,6 +21,7 @@ public class MovieGuessingGame {
     public static void main(String[] args) throws FileNotFoundException {
         Game movie = new Game();
         System.out.println("This is the movie guessing game! If you guess a letter correct, the letter will reveal itself"); 
+        System.out.println("After 7 incorrect guesses, you lose\n\n");
         movie.initGame();
     }
     
